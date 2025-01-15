@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Logger, BadRequestEx
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { SuccessResponse, ErrorResponse } from 'src/common/responses';
+import { SuccessResponse, ErrorResponse } from '@common/responses';
 import { ApiBadRequestResponse, ApiOkResponse } from '@nestjs/swagger';
 
 @Controller('users')
@@ -18,7 +18,7 @@ export class UsersController {
   async create(@Body() user: CreateUserDto) {
     try {
       const data = await this.usersService.create(user);
-      return new SuccessResponse(data, 201);
+      return new SuccessResponse(data,);
     }
     catch (error: any) {
       this.logger.error(error?.message);

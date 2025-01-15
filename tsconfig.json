@@ -10,7 +10,10 @@
     "strict": true,
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
+    "baseUrl": "./src",
+    "paths": {
+      "@common/*": ["common/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

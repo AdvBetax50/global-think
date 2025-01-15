@@ -8,7 +8,7 @@
 
 ## Description
 
-Global Think Technology technical test.
+Global Think Technology technical test. This is a simple NestJS project, that features a User CRUD with a Cache Manager.
 
 ## Project setup with Docker
 ```bash
@@ -19,9 +19,9 @@ $ docker-compose up -d
 ### Regarding Docker Build
 By building the docker, it uses the Dockerfile with node:22.13.0-alpine3.21 and then it will create the image
 of the project and expose the container in port 3000 (make sure that port is available).
-This build will take a few minutes (only if you dont have the image of node already, it has to pull the image from the node server).
+This build will take a few minutes (only if you dont have the image of node already, it has to pull the image from the node server). Once the build is up, the project will be running without problems.
 
-### Usefull information
+### Useful information
 If you wish to stop the container:
 ```bash
 $ docker-compose stop
@@ -33,5 +33,15 @@ $ docker-compose logs -f
 
 ## Examples
 
-There is a postman collection that uses all endpoints with examples, with the precise urls and bodies that
-each requires.
+There is a postman collection that uses all endpoints with examples, with the precise urls and bodies the endpoints have.
+
+## Additional Information
+
+This code could be better, specially the way it stores the information (it would be better with a MongoDB database, or even a SQL one).
+
+## Tests
+
+All tests can be run by using:
+```bash
+$ npm test
+```
