@@ -1,5 +1,7 @@
 import { CommonResponse } from './common-response';
 
+// the idea of this type of response is to unify the same information that is returned
+// each time an endpoint is called, whenever it would be a success or error.
 export class SuccessResponse implements CommonResponse {
   public status = 200;
   public message = 'success';

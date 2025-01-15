@@ -23,6 +23,7 @@ export class UsersService {
     }
   }
 
+  // gets any information from cache
   async get(key: string): Promise<CreateUserDto> {
     return await this.cacheManager.get(key);
   }
@@ -115,11 +116,14 @@ export class UsersService {
 
   async update(updatedUser: UpdateUserDto) {
     try {
+      // mail could be 'duplicated' if passed with same user.email
+      // in this case we check if its the same id of the user too.
       const { duplicated, id } = await this.isMailDuplicated(updatedUser.email);
       if (duplicated && id !== updatedUser.id) {
         throw new BadRequestException('Error at creating a new user, email is duplicated.');
       }
       const user = await this.get(updatedUser.id.toString());
+      // returns new user with all its info.
       const update: CreateUserDto = {
         id: updatedUser.id,
         name: updatedUser.name ?? user.name,
