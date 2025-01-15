@@ -37,7 +37,7 @@ There is a postman collection that uses all endpoints with examples, with the pr
 
 ## Additional Information
 
-This code could be better, specially the way it stores the information (it would be better with a MongoDB database, or even a SQL one).
+This code could be better, specially the way it stores the information (it would be better with a MongoDB database, or even a SQL one). The DTO for the User, contains the profile for the same user, it could have more attributes, and even if this profile should have more attributes, then it could be separated into a new DTO and maybe then, if required could also have its own CRUD.
 
 ## Tests
 
