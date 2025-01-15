@@ -8,10 +8,12 @@ import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 export class UsersService {
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) { }
 
+  // keys is an array with all ids of the current users stored in the cache
   async getKeys(): Promise<Array<number> | null> {
     return await this.cacheManager.get('keys');
   }
 
+  // creates and saves a new user into cache
   async set(key: string, value: any, newKey: boolean = false): Promise<void> {
     await this.cacheManager.set(key, value, 0);
     if (newKey) {
@@ -25,16 +27,20 @@ export class UsersService {
     return await this.cacheManager.get(key);
   }
 
+  // deletes from cache
   async delete(key: string): Promise<void> {
     await this.cacheManager.del(key);
+
+    // this is to delete the user from the user id array (keys)
     const keys: Array<number> = await this.cacheManager.get('keys');
-    const index = keys.findIndex(element => element === +key); // Check if the element was found
+    const index = keys.findIndex(element => element === +key);
     if (index !== -1) {
       keys.splice(index, 1);
     }
     await this.cacheManager.set('keys', keys, 0);
   }
 
+  // creates some users when app is started
   async createExampleUsers() {
     const users: CreateUserDto[] = [
       { id: 1, name: 'Alvaro Alcantara', email: 'alvaro@example.com', age: 20, profile: { username: 'aalcantara'} },
@@ -48,7 +54,7 @@ export class UsersService {
       for (const user of users) {
         await this.set(user.id.toString(), user);
       }
-      // save ids of examples
+      // save user ids of examples
       await this.set('keys', [1,2,3,4,5]);
     }
     catch(error) {
@@ -56,6 +62,7 @@ export class UsersService {
     }
   }
 
+  // verifies if mail is already stored in cache
   async isMailDuplicated(email: string): Promise<{duplicated: boolean, id?: number}> {
     const { users } = await this.findAll();
     users.forEach((u) => {
@@ -128,10 +135,11 @@ export class UsersService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: number): Promise<CreateUserDto> {
     try {
+      const user = await this.get(id.toString());
       await this.delete(id.toString());
-      return;
+      return user;
     }
     catch (error) {
       throw new InternalServerErrorException(`Error at removing user with id: ${id}`);

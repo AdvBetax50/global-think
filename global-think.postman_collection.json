@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "ed6f18e4-1c4f-41e2-a5a1-ceb9fbaf5293",
+		"name": "global-think",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24885447",
+		"_collection_link": "https://solar-space-573792.postman.co/workspace/lnfd~da7b0d1e-2f5d-4c3a-90e8-1bd60beb4169/collection/24885447-ed6f18e4-1c4f-41e2-a5a1-ceb9fbaf5293?action=share&source=collection_link&creator=24885447"
+	},
+	"item": [
+		{
+			"name": "get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/users"
+			},
+			"response": []
+		},
+		{
+			"name": "get user by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/users/3"
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 6,\r\n    \"name\": \"Flavio Fuentes\",\r\n    \"email\": \"flavio@example.com\",\r\n    \"age\": 26,\r\n    \"profile\": { \"username\": \"ffuentes\"}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/users"
+			},
+			"response": []
+		},
+		{
+			"name": "update user by id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": { \r\n        \"id\": 6,\r\n        \"name\": \"Flavio Fuentes\",\r\n        \"email\": \"flavio@example.com\",\r\n        \"age\": 35,\r\n        \"profile\": { \"username\": \"fffffffff\"}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/users/6"
+			},
+			"response": []
+		},
+		{
+			"name": "remove user by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/users/6"
+			},
+			"response": []
+		}
+	]
+}
